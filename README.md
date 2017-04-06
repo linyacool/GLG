@@ -7,5 +7,7 @@ An implementation of [Gray-level grouping (GLG): an automatic method for optimiz
 ## Usage
 ```shell
 python GLG.py --image  <image file> --result <result file>
+python FGLG.py --image  <image file> --result <result file>
+python AGLG.py --image  <image file> --result <result file>
 ```
 
