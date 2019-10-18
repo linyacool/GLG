@@ -4,6 +4,7 @@ import cv2
 import scipy.misc
 import os
 #import matplotlib.pyplot as plt
+import imageio
 import warnings
 from argparse import ArgumentParser
 warnings.filterwarnings("ignore")
@@ -53,7 +54,7 @@ def ten(img):
 def glg(img):
     height,width = np.shape(img)
     Npix = height * width
-    scipy.misc.imsave('original_img.jpg', img)
+    cv2.imwrite('original_img.jpg', img)
     hist = cv2.calcHist([img], [0], None, [M], [0.0, 255.0])
     #show histogram of the original image
     '''
@@ -180,6 +181,9 @@ def main():
     if not os.path.isfile(options.img):
         parser.error("Image %s does not exist.)" % options.network)
     res = options.res
+
+    e1 = cv2.getTickCount()
+    
     img = cv2.imread(options.img, cv2.IMREAD_GRAYSCALE)
     Trans,PixDist = glg(img)
     height, width = np.shape(img)
@@ -188,7 +192,13 @@ def main():
     for i in range(0,height):
         for j in range(0,width):
             image[i][j] = Trans[img[i][j]]
-    scipy.misc.imsave(res,image)
-    print "The PixDist is %.1lf" %PixDist
+
+    cv2.imwrite(res,image)
+    print ("The PixDist is %.1lf" %PixDist)
+
+    e2 = cv2.getTickCount()
+    t = (e2 - e1)/cv2.getTickFrequency()
+    print ("Execution took '%(val).3f' seconds." % {'val': t});
+    
 if __name__ == '__main__':
     main()
