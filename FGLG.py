@@ -5,7 +5,7 @@ import scipy.misc
 import os
 #import matplotlib.pyplot as plt
 import warnings
-import glg as GLG
+import GLG
 warnings.filterwarnings("ignore")
 ALPHA = 0.8
 M = 256
